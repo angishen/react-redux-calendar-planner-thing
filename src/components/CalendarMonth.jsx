@@ -1,28 +1,42 @@
+import moment from 'moment';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import getCalendarMonthWeeks from '../utils/getCalendarMonthWeeks';
 
-import { testAction } from '../actions';
+import CalendarDay from './CalendarDay';
+import CalendarWeek from './CalendarWeek';
 
 class CalendarMonth extends Component {
-  handleClick = event => {
-    this.props.testAction('hello');
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = { weeks: getCalendarMonthWeeks(moment()) };
+  }
+
+  renderCalendarDay(props) {
+    return <CalendarDay {...props} />;
+  }
 
   render() {
+    const { weeks } = this.state;
     return (
       <div>
-        <h1>{this.props.test}</h1>
-        <button onClick={this.handleClick}>CLICK ME</button>
+        <table>
+          <tbody>
+            {weeks.map((week, i) => (
+              <CalendarWeek key={i}>
+                {week.map((day, dayOfWeek) =>
+                  this.renderCalendarDay({
+                    key: dayOfWeek,
+                    day: day.format('D')
+                  }))}
+              </CalendarWeek>
+            ))}
+          </tbody>
+        </table>
       </div>
     );
   }
 }
 
-function mapStateToProps({ test }) {
-  return { test };
-}
-
-export default connect(
-  mapStateToProps,
-  { testAction }
-)(CalendarMonth);
+export default CalendarMonth;

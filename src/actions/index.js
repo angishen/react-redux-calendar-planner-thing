@@ -1,8 +1,12 @@
-export const TEST_ACTION = 'test_action';
+import moment from 'moment';
 
-export function testAction(word) {
+export const FETCH_TIME = 'fetch_time';
+
+export function fetchTime() {
+  const currentTime = moment();
+
   return {
-    type: TEST_ACTION,
-    payload: word
+    type: FETCH_TIME,
+    payload: currentTime
   };
 }

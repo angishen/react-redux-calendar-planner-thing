@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 
-import testReducer from './reducerTest';
+import timeReducer from './reducerTime';
 
 const rootReducer = combineReducers({
-  test: testReducer
+  currentTime: timeReducer
 });
 
 export default rootReducer;
