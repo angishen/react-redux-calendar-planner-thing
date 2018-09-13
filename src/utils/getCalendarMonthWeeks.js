@@ -5,7 +5,7 @@ const WEEKDAYS = [0, 1, 2, 3, 4, 5, 6];
 // returns a nested array of a given month divided into weeks
 export default function getCalendarMonthWeeks(
   month,
-  enableOutsideDays = true,
+  enableOutsideDays = false,
   firstDayOfWeek = moment.localeData().firstDayOfWeek()
 ) {
   if (!moment.isMoment(month) || !month.isValid()) {

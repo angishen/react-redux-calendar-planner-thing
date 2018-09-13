@@ -6,21 +6,43 @@ import getCalendarMonthWeeks from '../utils/getCalendarMonthWeeks';
 import CalendarDay from './CalendarDay';
 import CalendarWeek from './CalendarWeek';
 
+import { prevMonth, nextMonth } from '../actions';
+
 class CalendarMonth extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { weeks: getCalendarMonthWeeks(moment()) };
+    this.state = {
+      currentMonth: moment()
+    };
+  }
+
+  // huzzahhhh this works
+  componentWillReceiveProps(nextProps) {
+    this.setState({ currentMonth: nextProps.month });
   }
 
   renderCalendarDay(props) {
     return <CalendarDay {...props} />;
   }
 
+  handlePrevMonthClick = () => {
+    this.props.prevMonth(this.state.currentMonth);
+  };
+
+  handleNextMonthClick = () => {
+    this.props.nextMonth(this.state.currentMonth);
+  };
+
   render() {
-    const { weeks } = this.state;
+    let { currentMonth } = this.state;
+    let weeks = getCalendarMonthWeeks(currentMonth);
+
     return (
       <div>
+        <div>{this.state.currentMonth.format('MMMM YYYY')}</div>
+        <button onClick={this.handlePrevMonthClick}>Prev</button>
+        <button onClick={this.handleNextMonthClick}>Next</button>
         <table>
           <tbody>
             {weeks.map((week, i) => (
@@ -28,8 +50,9 @@ class CalendarMonth extends Component {
                 {week.map((day, dayOfWeek) =>
                   this.renderCalendarDay({
                     key: dayOfWeek,
-                    day: day.format('D')
-                  }))}
+                    day: day
+                  })
+                )}
               </CalendarWeek>
             ))}
           </tbody>
@@ -39,4 +62,11 @@ class CalendarMonth extends Component {
   }
 }
 
-export default CalendarMonth;
+function mapStateToProps({ month }) {
+  return { month };
+}
+
+export default connect(
+  mapStateToProps,
+  { prevMonth, nextMonth }
+)(CalendarMonth);
