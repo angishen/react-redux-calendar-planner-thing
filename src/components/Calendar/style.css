@@ -1,0 +1,15 @@
+.calendar-day.selected {
+  background-color: aquamarine;
+  border: 1px solid black;
+}
+
+.calendar-day {
+  background-color: red;
+  border: 1px solid black;
+}
+
+.calendar-month {
+    border-radius: 10px;
+    background-color: papayawhip;
+    width: 200px;
+}
