@@ -1,15 +1,37 @@
 .calendar-day.selected {
-  background-color: aquamarine;
-  border: 1px solid black;
+  background-color: teal;
+  border: 1px solid darkgrey;
 }
 
 .calendar-day {
-  background-color: red;
-  border: 1px solid black;
+  background-color: white;
+  border: 1px solid darkgrey;
+  text-align: center;
 }
 
-.calendar-month {
-    border-radius: 10px;
-    background-color: papayawhip;
-    width: 200px;
+.calendar-container {
+  border-radius: 10px;
+  background-color: papayawhip;
+  width: 200px;
+}
+
+table {
+  table-layout: fixed;
+  margin: 20px auto;
+}
+
+table,
+tr,
+td {
+  border-collapse: collapse;
+}
+
+td {
+  width: 20px;
+  height: 20px;
+  font-size: 12px;
+}
+
+.calendar-contents {
+  margin: 0px auto;
 }
