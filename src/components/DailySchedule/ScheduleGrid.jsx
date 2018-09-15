@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import getDailyTimeBlocks from '../../utils/getDailyTimeBlocks';
+import './style.css';
 
 class ScheduleGrid extends Component {
   constructor(props) {
@@ -31,7 +32,7 @@ class ScheduleGrid extends Component {
       return <div>Loading...</div>;
     }
     return (
-      <div>
+      <div className="schedule-grid">
         <table>
           <thead>
             <tr>

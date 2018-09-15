@@ -1,37 +1,87 @@
-.calendar-day.selected {
-  background-color: teal;
-  border: 1px solid darkgrey;
+.calendar-container {
+  background-color: light;
+  box-shadow: 6px 10px 27px 6px rgba(171, 171, 171, 0.69);
+  width: 325px;
+  height: 400px;
+  font-size: 20px;
+  font-family: 'Abril Fatface';
+}
+
+.calender-grid {
+  background-color: white;
+  margin: 20px auto;
+  border-collapse: collapse;
 }
 
 .calendar-day {
   background-color: white;
-  border: 1px solid darkgrey;
   text-align: center;
 }
 
-.calendar-container {
-  border-radius: 10px;
-  background-color: papayawhip;
-  width: 200px;
+.calendar-day.selected {
+  background-color: crimson;
+  color: white;
 }
 
-table {
-  table-layout: fixed;
-  margin: 20px auto;
+.calendar-day.selected:hover {
+  background-color: crimson;
+  color: white;
 }
 
-table,
-tr,
-td {
-  border-collapse: collapse;
+.calendar-day:hover {
+  background-color: #e2e2e2;
 }
 
-td {
-  width: 20px;
-  height: 20px;
-  font-size: 12px;
+
+.calendar-week {
+  border: 1px solid lightgrey;
 }
 
 .calendar-contents {
-  margin: 0px auto;
+  margin: 20px auto;
+}
+
+table {
+  margin: 0 auto;
+}
+
+tr {
+  border-collapse: collapse;
+  cursor: pointer;
+}
+
+td {
+  width: 30px;
+  height: 20px;
+}
+
+.heading-month {
+  font-size: 50px;
+  width: 225px;
+  margin: 10px auto;
+  font-weight: 900;
+}
+
+.heading-year {
+  font-size: 20px;
+  font-family: 'Roboto', sans-serif;
+  vertical-align: center;
+}
+
+.weekday-labels {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  font-size: 12px;
+  text-align: center;
+}
+
+.month-toggler {
+  width: 225px;
+  margin: 0 auto;
+
+}
+
+button {
+  border: none;
+  outline: none;
 }

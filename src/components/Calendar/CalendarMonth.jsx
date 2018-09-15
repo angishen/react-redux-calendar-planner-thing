@@ -31,12 +31,12 @@ class CalendarMonth extends Component {
   renderCalendarGrid() {
     let { currentMonth } = this.state;
     let weeks = getCalendarMonthWeeks(currentMonth);
-    const weekdays = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
+    const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
     return (
       <table>
         <tbody>
-          <tr>
+          <tr className="weekday-labels">
             {weekdays.map((day, i) => (
               <td key={i}>{day}</td>
             ))}
@@ -69,11 +69,20 @@ class CalendarMonth extends Component {
       <div className="calendar-container">
         <div className="calendar-contents">
           <div className="calendar-header">
-            <span>
-              <button onClick={this.handlePrevMonthClick}>Prev</button>
-              {this.state.currentMonth.format('MMMM YYYY')}
-              <button onClick={this.handleNextMonthClick}>Next</button>
-            </span>
+            <div className="month-toggler">
+              <span>
+                <button onClick={this.handlePrevMonthClick} ><i className="fa fa-arrow-left"></i></button>
+                <button onClick={this.handleNextMonthClick}><i className="fa fa-arrow-right"></i></button>
+              </span>
+            </div>
+            <div className="calendar-date-heading">
+              <div className="heading-month">
+                {this.state.currentMonth.format('MMM')}
+                <div className="heading-year">
+                  {this.state.currentMonth.format('YYYY')}
+                </div>
+              </div>
+            </div>
           </div>
           <div className="calendar-grid">{this.renderCalendarGrid()}</div>
         </div>
