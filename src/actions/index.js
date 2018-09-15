@@ -1,21 +1,21 @@
-export const PREV_MONTH = 'prev_month';
-export const NEXT_MONTH = 'next_month';
+export const SELECT_PREV_MONTH = 'select_prev_month';
+export const SELECT_NEXT_MONTH = 'next_month';
 export const SELECT_DATE = 'select_date';
 
-export function prevMonth(month) {
+export function selectPrevMonth(month) {
   const prevMonth = month.clone().subtract(1, 'month');
 
   return {
-    type: PREV_MONTH,
+    type: SELECT_PREV_MONTH,
     payload: prevMonth
   };
 }
 
-export function nextMonth(month) {
+export function selectNextMonth(month) {
   const nextMonth = month.clone().add(1, 'month');
 
   return {
-    type: NEXT_MONTH,
+    type: SELECT_NEXT_MONTH,
     payload: nextMonth
   };
 }

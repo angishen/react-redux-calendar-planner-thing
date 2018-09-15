@@ -6,7 +6,7 @@ import getCalendarMonthWeeks from '../../utils/getCalendarMonthWeeks';
 import CalendarDay from './CalendarDay';
 import CalendarWeek from './CalendarWeek';
 
-import { prevMonth, nextMonth, selectDate } from '../../actions/index';
+import { selectPrevMonth, selectNextMonth, selectDate } from '../../actions/index';
 
 import './style.css';
 
@@ -47,11 +47,10 @@ class CalendarMonth extends Component {
           </tr>
           {weeks.map((week, i) => (
             <CalendarWeek key={i}>
-              {week.map((day, dayOfWeek) =>
+              {week.map((date, dayOfWeek) =>
                 this.renderCalendarDay({
                   key: dayOfWeek,
-                  day: day,
-                  currentMoment: this.state.currentMoment
+                  date: date,
                 })
               )}
             </CalendarWeek>
@@ -62,11 +61,11 @@ class CalendarMonth extends Component {
   }
 
   handlePrevMonthClick = () => {
-    this.props.prevMonth(this.state.currentMoment);
+    this.props.selectPrevMonth(this.state.currentMoment);
   };
 
   handleNextMonthClick = () => {
-    this.props.nextMonth(this.state.currentMoment);
+    this.props.selectNextMonth(this.state.currentMoment);
   };
 
   render() {
@@ -106,5 +105,5 @@ function mapStateToProps({ month }) {
 
 export default connect(
   mapStateToProps,
-  { prevMonth, nextMonth, selectDate }
+  { selectPrevMonth, selectNextMonth, selectDate }
 )(CalendarMonth);

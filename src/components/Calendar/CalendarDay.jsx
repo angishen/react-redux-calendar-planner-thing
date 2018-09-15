@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import isEquivalent from '../../utils/isEquivalent';
+import { isSameDate } from '../../utils/dateUtils';
 
 import { selectDate } from '../../actions';
 
@@ -13,14 +13,18 @@ class CalendarDay extends Component {
     this.state = { selected: false };
   }
 
+  // returnFormattedDate(date) {
+  //   return `date: ${date ? date.format('MM-DD') : 'null'}`;
+  // }
+
   componentWillReceiveProps(nextProps) {
-    this.props.day === nextProps.selectedDate
+    isSameDate(nextProps.date, nextProps.selectedDate)
       ? this.setState({ selected: true })
       : this.setState({ selected: false });
   }
 
   handleDayClick = () => {
-    if (this.props.day) this.props.selectDate(this.props.day);
+    if (this.props.date) this.props.selectDate(this.props.date);
   };
 
   render() {
@@ -28,10 +32,10 @@ class CalendarDay extends Component {
       <td
         className={`calendar-day
           ${this.state.selected ? 'selected' : ''}
-          ${this.props.day === null ? 'disabled' : ''}`}
+          ${this.props.date === null ? 'disabled' : ''}`}
         onClick={this.handleDayClick}
       >
-        {this.props.day ? this.props.day.format('D') : ''}
+        {this.props.date ? this.props.date.format('D') : ''}
       </td>
     );
   }
