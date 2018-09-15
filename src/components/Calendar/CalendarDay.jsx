@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import isEquivalent from '../../utils/isEquivalent';
 
 import { selectDate } from '../../actions';
 
@@ -25,7 +26,9 @@ class CalendarDay extends Component {
   render() {
     return (
       <td
-        className={`calendar-day ${this.state.selected ? 'selected' : ''}`}
+        className={`calendar-day
+          ${this.state.selected ? 'selected' : ''}
+          ${this.props.day === null ? 'disabled' : ''}`}
         onClick={this.handleDayClick}
       >
         {this.props.day ? this.props.day.format('D') : ''}
