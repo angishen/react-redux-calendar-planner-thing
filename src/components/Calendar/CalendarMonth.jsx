@@ -6,7 +6,7 @@ import getCalendarMonthWeeks from '../../utils/getCalendarMonthWeeks';
 import CalendarDay from './CalendarDay';
 import CalendarWeek from './CalendarWeek';
 
-import { prevMonth, nextMonth } from '../../actions/index';
+import { prevMonth, nextMonth, selectDate } from '../../actions/index';
 
 import './style.css';
 
@@ -15,13 +15,17 @@ class CalendarMonth extends Component {
     super(props);
 
     this.state = {
-      currentMonth: moment()
+      currentMoment: moment().startOf('hour')
     };
+  }
+
+  componentDidMount() {
+    this.props.selectDate(this.state.currentMoment);
   }
 
   // huzzahhhh this works
   componentWillReceiveProps(nextProps) {
-    this.setState({ currentMonth: nextProps.month });
+    this.setState({ currentMoment: nextProps.month });
   }
 
   renderCalendarDay(props) {
@@ -29,8 +33,8 @@ class CalendarMonth extends Component {
   }
 
   renderCalendarGrid() {
-    let { currentMonth } = this.state;
-    let weeks = getCalendarMonthWeeks(currentMonth);
+    let { currentMoment } = this.state;
+    let weeks = getCalendarMonthWeeks(currentMoment);
     const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
     return (
@@ -46,7 +50,8 @@ class CalendarMonth extends Component {
               {week.map((day, dayOfWeek) =>
                 this.renderCalendarDay({
                   key: dayOfWeek,
-                  day: day
+                  day: day,
+                  currentMoment: this.state.currentMoment
                 })
               )}
             </CalendarWeek>
@@ -57,11 +62,11 @@ class CalendarMonth extends Component {
   }
 
   handlePrevMonthClick = () => {
-    this.props.prevMonth(this.state.currentMonth);
+    this.props.prevMonth(this.state.currentMoment);
   };
 
   handleNextMonthClick = () => {
-    this.props.nextMonth(this.state.currentMonth);
+    this.props.nextMonth(this.state.currentMoment);
   };
 
   render() {
@@ -69,17 +74,21 @@ class CalendarMonth extends Component {
       <div className="calendar-container">
         <div className="calendar-contents">
           <div className="calendar-header">
-            <div className="month-toggler">
-              <span>
-                <button onClick={this.handlePrevMonthClick} ><i className="fa fa-arrow-left"></i></button>
-                <button onClick={this.handleNextMonthClick}><i className="fa fa-arrow-right"></i></button>
-              </span>
-            </div>
             <div className="calendar-date-heading">
               <div className="heading-month">
-                {this.state.currentMonth.format('MMM')}
+                {this.state.currentMoment.format('MMM')}
+                <div className="month-toggler">
+                  <span className="month-toggler-buttons">
+                    <button onClick={this.handlePrevMonthClick}>
+                      <i className="fa fa-chevron-left" />
+                    </button>
+                    <button onClick={this.handleNextMonthClick}>
+                      <i className="fa fa-chevron-right" />
+                    </button>
+                  </span>
+                </div>
                 <div className="heading-year">
-                  {this.state.currentMonth.format('YYYY')}
+                  {this.state.currentMoment.format('YYYY')}
                 </div>
               </div>
             </div>
@@ -97,5 +106,5 @@ function mapStateToProps({ month }) {
 
 export default connect(
   mapStateToProps,
-  { prevMonth, nextMonth }
+  { prevMonth, nextMonth, selectDate }
 )(CalendarMonth);

@@ -1,8 +1,9 @@
 .calendar-container {
-  background-color: light;
+  margin: 100px auto;
+  background-color: white;
   box-shadow: 6px 10px 27px 6px rgba(171, 171, 171, 0.69);
   width: 325px;
-  height: 400px;
+  height: 375px;
   font-size: 20px;
   font-family: 'Abril Fatface';
 }
@@ -16,6 +17,7 @@
 .calendar-day {
   background-color: white;
   text-align: center;
+  cursor: pointer;
 }
 
 .calendar-day.selected {
@@ -23,15 +25,23 @@
   color: white;
 }
 
+.calendar-day.disabled {
+  cursor: default;
+}
+
 .calendar-day.selected:hover {
   background-color: crimson;
   color: white;
 }
 
-.calendar-day:hover {
-  background-color: #e2e2e2;
+.calendar-day.disabled:hover {
+  background-color: white;
 }
 
+.calendar-day:hover {
+  /*background-color: #e2e2e2;*/
+  background-color: rgba(220, 20, 60, 0.19);
+}
 
 .calendar-week {
   border: 1px solid lightgrey;
@@ -47,7 +57,6 @@ table {
 
 tr {
   border-collapse: collapse;
-  cursor: pointer;
 }
 
 td {
@@ -58,6 +67,7 @@ td {
 .heading-month {
   font-size: 50px;
   width: 225px;
+  padding-top: 25px;
   margin: 10px auto;
   font-weight: 900;
 }
@@ -76,12 +86,17 @@ td {
 }
 
 .month-toggler {
-  width: 225px;
-  margin: 0 auto;
+  width: 60px;
+  float: right;
+}
 
+.month-toggler-buttons {
+  float: right;
 }
 
 button {
   border: none;
   outline: none;
+  font-size: 20px;
 }
+
