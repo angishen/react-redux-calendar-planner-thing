@@ -101,3 +101,8 @@ button {
   font-size: 20px;
   cursor: pointer;
 }
+
+button:hover {
+  color: crimson;
+}
+
