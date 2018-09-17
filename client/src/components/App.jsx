@@ -9,7 +9,8 @@ export default class App extends Component {
     return (
       <div className="app">
         <CalendarMonth />
-        <ScheduleGrid />
+        {/*<ScheduleGrid />*/}
+
       </div>
     );
   }

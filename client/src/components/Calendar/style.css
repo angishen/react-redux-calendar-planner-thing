@@ -40,7 +40,7 @@
 
 .calendar-day:hover {
   /*background-color: #e2e2e2;*/
-  background-color: rgba(220, 20, 60, 0.11);
+  background-color: rgba(220, 20, 60, 0.19);
 }
 
 .calendar-week {
@@ -86,7 +86,7 @@ td {
 }
 
 .month-toggler {
-  width: 80px;
+  width: 60px;
   float: right;
 }
 
@@ -95,14 +95,8 @@ td {
 }
 
 button {
-  background-color: white;
   border: none;
   outline: none;
   font-size: 20px;
-  cursor: pointer;
-}
-
-button:hover {
-  color: crimson;
 }
 
