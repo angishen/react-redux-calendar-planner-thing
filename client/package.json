@@ -2,6 +2,11 @@
   "name": "cool-calendar-planner-thing",
   "version": "0.1.0",
   "private": true,
+  "proxy": {
+    "/auth/google": {
+      "target": "http://localhost:5000"
+    }
+  },
   "dependencies": {
     "classnames": "^2.2.6",
     "moment": "^2.22.2",

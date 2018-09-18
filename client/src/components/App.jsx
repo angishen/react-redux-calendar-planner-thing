@@ -8,9 +8,11 @@ export default class App extends Component {
   render() {
     return (
       <div className="app">
-        <CalendarMonth />
-        {/*<ScheduleGrid />*/}
-
+        <div>
+          <CalendarMonth />
+          {/*<ScheduleGrid />*/}
+        </div>
+        <a href="/auth/google">Sign In With Google</a>
       </div>
     );
   }
