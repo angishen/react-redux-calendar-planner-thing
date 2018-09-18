@@ -1,31 +1,18 @@
-import moment from 'moment';
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import getCalendarMonthWeeks from '../../utils/getCalendarMonthWeeks';
 
 import CalendarDay from './CalendarDay';
 import CalendarWeek from './CalendarWeek';
 
-import { selectPrevMonth, selectNextMonth, selectDate } from '../../actions/index';
-
 import './style.css';
 
-class CalendarMonth extends Component {
+export default class CalendarMonth extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      currentMoment: moment().startOf('hour')
+      selectedMonth: this.props.currentDateAndHour.clone().startOf('month')
     };
-  }
-
-  componentDidMount() {
-    this.props.selectDate(this.state.currentMoment);
-  }
-
-  // huzzahhhh this works
-  componentWillReceiveProps(nextProps) {
-    this.setState({ currentMoment: nextProps.month });
   }
 
   renderCalendarDay(props) {
@@ -33,8 +20,8 @@ class CalendarMonth extends Component {
   }
 
   renderCalendarGrid() {
-    let { currentMoment } = this.state;
-    let weeks = getCalendarMonthWeeks(currentMoment);
+    let { selectedMonth } = this.state;
+    let weeks = getCalendarMonthWeeks(selectedMonth);
     const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
     return (
@@ -51,6 +38,8 @@ class CalendarMonth extends Component {
                 this.renderCalendarDay({
                   key: dayOfWeek,
                   date: date,
+                  selectedDate: this.props.selectedDate,
+                  handleDayClick: this.props.handleDayClick
                 })
               )}
             </CalendarWeek>
@@ -61,11 +50,13 @@ class CalendarMonth extends Component {
   }
 
   handlePrevMonthClick = () => {
-    this.props.selectPrevMonth(this.state.currentMoment);
+    const prevMonth = this.state.selectedMonth.clone().subtract(1, 'month');
+    this.setState({ selectedMonth: prevMonth });
   };
 
   handleNextMonthClick = () => {
-    this.props.selectNextMonth(this.state.currentMoment);
+    const nextMonth = this.state.selectedMonth.clone().add(1, 'month');
+    this.setState({ selectedMonth: nextMonth });
   };
 
   render() {
@@ -75,7 +66,7 @@ class CalendarMonth extends Component {
           <div className="calendar-header">
             <div className="calendar-date-heading">
               <div className="heading-month">
-                {this.state.currentMoment.format('MMM')}
+                {this.state.selectedMonth.format('MMM')}
                 <div className="month-toggler">
                   <span className="month-toggler-buttons">
                     <button onClick={this.handlePrevMonthClick}>
@@ -87,7 +78,7 @@ class CalendarMonth extends Component {
                   </span>
                 </div>
                 <div className="heading-year">
-                  {this.state.currentMoment.format('YYYY')}
+                  {this.state.selectedMonth.format('YYYY')}
                 </div>
               </div>
             </div>
@@ -98,12 +89,3 @@ class CalendarMonth extends Component {
     );
   }
 }
-
-function mapStateToProps({ month }) {
-  return { month };
-}
-
-export default connect(
-  mapStateToProps,
-  { selectPrevMonth, selectNextMonth, selectDate }
-)(CalendarMonth);

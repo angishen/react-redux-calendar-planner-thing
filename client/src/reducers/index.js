@@ -1,11 +1,8 @@
 import { combineReducers } from 'redux';
-
-import monthReducer from './reducerMonth';
-import dateReducer from './reducerDate';
+import calendarDateReducer from './reducerCalendarDate';
 
 const rootReducer = combineReducers({
-  month: monthReducer,
-  selectedDate: dateReducer
+  selectedCalendarDate: calendarDateReducer
 });
 
 export default rootReducer;

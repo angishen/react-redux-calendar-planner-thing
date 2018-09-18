@@ -14,7 +14,7 @@ class ScheduleGrid extends Component {
 
   componentWillReceiveProps(nextProps) {
     this.setState({
-      timeBlocks: getDailyTimeBlocks(nextProps.selectedDate)
+      timeBlocks: getDailyTimeBlocks(nextProps.selectedCalendarDate)
     });
   }
 
@@ -39,7 +39,7 @@ class ScheduleGrid extends Component {
           <thead>
             <tr>
               <th />
-              <th>{this.props.selectedDate.format('MMMM D, YYYY')}</th>
+              <th>{this.props.selectedCalendarDate.format('MMMM D, YYYY')}</th>
             </tr>
           </thead>
           <tbody>{timeBlocks.map(this.renderDayRow)}</tbody>
@@ -50,7 +50,7 @@ class ScheduleGrid extends Component {
 }
 
 function mapStateToProps({ selectedDate }) {
-  return { selectedDate };
+  return { selectedDate: selectedCalendarDate };
 }
 
 export default connect(mapStateToProps)(ScheduleGrid);

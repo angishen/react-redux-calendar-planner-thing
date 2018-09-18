@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { isSameDate } from '../../utils/dateUtils';
-
-import { selectDate } from '../../actions';
 
 import './style.css';
 
-class CalendarDay extends Component {
+export default class CalendarDay extends Component {
   constructor(props) {
     super(props);
 
@@ -24,7 +21,7 @@ class CalendarDay extends Component {
   }
 
   handleDayClick = () => {
-    if (this.props.date) this.props.selectDate(this.props.date);
+    this.props.handleDayClick(this.props.date)
   };
 
   render() {
@@ -41,11 +38,3 @@ class CalendarDay extends Component {
   }
 }
 
-function mapStateToProps({ selectedDate }) {
-  return { selectedDate };
-}
-
-export default connect(
-  mapStateToProps,
-  { selectDate }
-)(CalendarDay);
