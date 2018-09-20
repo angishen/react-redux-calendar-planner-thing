@@ -8,7 +8,7 @@ import CalendarWeek from './CalendarWeek';
 import './style.css';
 
 const StyledCalendarContainer = styled.div`
-  font-family: ${props => props.theme.font.family.cursive};
+  font-family: ${props => props.theme.font.family.primary};
   font-size: ${props => props.theme.font.size.large};
   background-color: ${props => props.theme.color.background};
   :hover {
@@ -50,7 +50,7 @@ export default class CalendarMonth extends Component {
                   key: dayOfWeek,
                   date: date,
                   selectedDate: this.props.selectedDate,
-                  handleDayClick: this.props.handleDayClick
+                  handleDateClick: this.props.handleDateClick
                 })
               )}
             </CalendarWeek>

@@ -7,7 +7,7 @@ import CalendarMonth from '../../components/CalendarMonth/index';
 import { selectCalendarDate } from '../../actions/index';
 
 import { ThemeProvider } from 'styled-components';
-import { mainCalendarTheme } from '../../themes/mainCalendarTheme';
+import { mainCalendarTheme } from '../../themes/calendarThemes';
 
 class MainCalendar extends Component {
   constructor(props) {
@@ -22,7 +22,7 @@ class MainCalendar extends Component {
     this.props.selectDate(this.state.currentDateAndHour);
   }
 
-  handleDayClick = date => {
+  handleDateClick = date => {
     if (date) this.props.selectDate(date);
   };
 
@@ -31,7 +31,7 @@ class MainCalendar extends Component {
       <ThemeProvider theme={mainCalendarTheme}>
         <CalendarMonth
           currentDateAndHour={this.state.currentDateAndHour}
-          handleDayClick={this.handleDayClick}
+          handleDateClick={this.handleDateClick}
           selectedDate={this.props.selectedDate}
         />
       </ThemeProvider>

@@ -25,8 +25,8 @@ export default class CalendarDay extends Component {
       : this.setState({ selected: false });
   }
 
-  handleDayClick = () => {
-    this.props.handleDayClick(this.props.date);
+  handleDateClick = () => {
+    this.props.handleDateClick(this.props.date);
   };
 
   render() {
@@ -35,7 +35,7 @@ export default class CalendarDay extends Component {
         className={`calendar-day
           ${this.state.selected ? 'selected' : ''}
           ${this.props.date === null ? 'disabled' : ''}`}
-        onClick={this.handleDayClick}
+        onClick={this.handleDateClick}
       >
         {this.props.date ? this.props.date.format('D') : ''}
       </StyledCalendarDay>
