@@ -6,6 +6,9 @@ import CalendarMonth from '../../components/CalendarMonth/index';
 
 import { selectCalendarDate } from '../../actions/index';
 
+import { ThemeProvider } from 'styled-components';
+import { mainCalendarTheme } from '../../themes/mainCalendarTheme';
+
 class MainCalendar extends Component {
   constructor(props) {
     super(props);
@@ -25,13 +28,13 @@ class MainCalendar extends Component {
 
   render() {
     return (
-      <div>
+      <ThemeProvider theme={mainCalendarTheme}>
         <CalendarMonth
           currentDateAndHour={this.state.currentDateAndHour}
           handleDayClick={this.handleDayClick}
           selectedDate={this.props.selectedDate}
         />
-      </div>
+      </ThemeProvider>
     );
   }
 }

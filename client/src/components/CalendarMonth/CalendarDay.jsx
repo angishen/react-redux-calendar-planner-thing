@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import { isSameDate } from '../../utils/dateUtils';
+import styled from 'styled-components';
 
 import './style.css';
+
+const StyledCalendarDay = styled.td`
+  border-radius: ${props => props.theme.border.radius}
+`;
 
 export default class CalendarDay extends Component {
   constructor(props) {
@@ -21,20 +26,19 @@ export default class CalendarDay extends Component {
   }
 
   handleDayClick = () => {
-    this.props.handleDayClick(this.props.date)
+    this.props.handleDayClick(this.props.date);
   };
 
   render() {
     return (
-      <td
+      <StyledCalendarDay
         className={`calendar-day
           ${this.state.selected ? 'selected' : ''}
           ${this.props.date === null ? 'disabled' : ''}`}
         onClick={this.handleDayClick}
       >
         {this.props.date ? this.props.date.format('D') : ''}
-      </td>
+      </StyledCalendarDay>
     );
   }
 }
-

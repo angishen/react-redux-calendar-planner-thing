@@ -1,10 +1,21 @@
 import React, { Component } from 'react';
 import getCalendarMonthWeeks from '../../utils/getCalendarMonthWeeks';
+import styled from 'styled-components';
 
 import CalendarDay from './CalendarDay';
 import CalendarWeek from './CalendarWeek';
 
 import './style.css';
+
+const StyledCalendarContainer = styled.div`
+  font-family: ${props => props.theme.font.family.cursive};
+  font-size: ${props => props.theme.font.size.large};
+  background-color: ${props => props.theme.color.background};
+  :hover {
+    color: ${props => props.theme.color.hoverText},
+    background-color: ${props => props.theme.color.hoverBg}
+  }
+`;
 
 export default class CalendarMonth extends Component {
   constructor(props) {
@@ -61,7 +72,7 @@ export default class CalendarMonth extends Component {
 
   render() {
     return (
-      <div className="calendar-container">
+      <StyledCalendarContainer className="calendar-container">
         <div className="calendar-contents">
           <div className="calendar-header">
             <div className="calendar-date-heading">
@@ -85,7 +96,7 @@ export default class CalendarMonth extends Component {
           </div>
           <div className="calendar-grid">{this.renderCalendarGrid()}</div>
         </div>
-      </div>
+      </StyledCalendarContainer>
     );
   }
 }

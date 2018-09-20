@@ -1,15 +1,11 @@
 .calendar-container {
   margin: 100px auto;
-  background-color: white;
   box-shadow: 6px 10px 27px 6px rgba(171, 171, 171, 0.69);
   width: 325px;
   height: 375px;
-  font-size: 20px;
-  font-family: 'Abril Fatface';
 }
 
 .calender-grid {
-  background-color: white;
   margin: 20px auto;
   border-collapse: collapse;
 }
