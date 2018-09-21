@@ -53,7 +53,6 @@ const StyledCalendarDayContent = styled.div`
   margin: 0;         
   top: 50%;
   left: 50%;
-  margin-right: -50%;
   transform: translate(-50%, -50%)
 `;
 
