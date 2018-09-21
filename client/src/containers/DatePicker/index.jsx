@@ -20,10 +20,12 @@ class DatePicker extends Component {
   }
 
   handleDateClick = date => {
-    if (date) this.props.selectDate;
+    if (date) this.props.selectDate(date);
   };
 
   render() {
+    const weekdayLabels = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+
     return (
       <div>
         <ThemeProvider theme={datePickerTheme}>
@@ -31,6 +33,10 @@ class DatePicker extends Component {
             currentDateAndHour={this.state.currentDateAndHour}
             handleDateClick={this.handleDateClick}
             selectedDate={this.props.selectedDate}
+            monthFormat={'MMMM'}
+            width="250px"
+            height="300px"
+            weekdayLabels={weekdayLabels}
           />
         </ThemeProvider>
       </div>

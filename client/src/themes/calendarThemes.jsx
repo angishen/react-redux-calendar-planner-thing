@@ -1,8 +1,13 @@
 export const mainCalendarTheme = {
   color: {
+    default: '#222',
+    selected: '#FFF',
+    hovered: '#222'
+  },
+  backgroundColor: {
+    default: '#FFF',
     selected: '#DC143C',
-    background: '#FFF',
-    black: '#222'
+    hovered: '#e2e2e2'
   },
   font: {
     size: {
@@ -10,7 +15,7 @@ export const mainCalendarTheme = {
       small: '10px',
       xsmall: '8px',
       large: '20px',
-      xlarge: '30px'
+      heading: '50px'
     },
     family: {
       primary: 'Abril Fatface',
@@ -18,23 +23,30 @@ export const mainCalendarTheme = {
     }
   },
   border: {
-    radius: '0%'
-  }
+    radius: '0%',
+    style: '1px solid black'
+  },
+  boxShadow: '6px 10px 27px 6px rgba(171, 171, 171, 0.69)'
 };
 
 export const datePickerTheme = {
   color: {
+    default: '#222',
+    selected: '#FFF',
+    hovered: '#222'
+  },
+  backgroundColor: {
+    default: '#FFF',
     selected: '#DC143C',
-    background: '#FFF',
-    black: '#222'
+    hovered: '#e2e2e2'
   },
   font: {
     size: {
       base: '12px',
       small: '10px',
       xsmall: '8px',
-      large: '20px',
-      xlarge: '30px'
+      large: '15px',
+      heading: '16px'
     },
     family: {
       primary: 'Roboto',
@@ -42,6 +54,8 @@ export const datePickerTheme = {
     }
   },
   border: {
-    radius: '50%'
-  }
+    radius: '50%',
+    style: 'none'
+  },
+  boxShadow: 'none'
 };

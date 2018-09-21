@@ -11,10 +11,19 @@ const StyledCalendarContainer = styled.div`
   font-family: ${props => props.theme.font.family.primary};
   font-size: ${props => props.theme.font.size.large};
   background-color: ${props => props.theme.color.background};
-  :hover {
-    color: ${props => props.theme.color.hoverText},
-    background-color: ${props => props.theme.color.hoverBg}
-  }
+  width: ${props => props.width}
+  height: ${props => props.height}
+`;
+
+const StyledCalendarHeader = styled.div`
+  font-size: ${props => props.theme.font.size.heading};
+  margin-bottom: 6%;
+`;
+
+const StyledTable = styled.table`
+  width: 100%;
+  margin: 0 auto;
+  border-spacing: 0px;
 `;
 
 export default class CalendarMonth extends Component {
@@ -33,10 +42,10 @@ export default class CalendarMonth extends Component {
   renderCalendarGrid() {
     let { selectedMonth } = this.state;
     let weeks = getCalendarMonthWeeks(selectedMonth);
-    const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const weekdays = this.props.weekdayLabels;
 
     return (
-      <table>
+      <StyledTable>
         <tbody>
           <tr className="weekday-labels">
             {weekdays.map((day, i) => (
@@ -56,7 +65,7 @@ export default class CalendarMonth extends Component {
             </CalendarWeek>
           ))}
         </tbody>
-      </table>
+      </StyledTable>
     );
   }
 
@@ -72,30 +81,31 @@ export default class CalendarMonth extends Component {
 
   render() {
     return (
-      <StyledCalendarContainer className="calendar-container">
-        <div className="calendar-contents">
-          <div className="calendar-header">
-            <div className="calendar-date-heading">
-              <div className="heading-month">
-                {this.state.selectedMonth.format('MMM')}
-                <div className="month-toggler">
-                  <span className="month-toggler-buttons">
-                    <button onClick={this.handlePrevMonthClick}>
-                      <i className="fa fa-chevron-left" />
-                    </button>
-                    <button onClick={this.handleNextMonthClick}>
-                      <i className="fa fa-chevron-right" />
-                    </button>
-                  </span>
-                </div>
-                <div className="heading-year">
-                  {this.state.selectedMonth.format('YYYY')}
-                </div>
+      <StyledCalendarContainer
+        width={this.props.width}
+        height={this.props.height}
+      >
+        <div className="calendar-header">
+          <div className="calendar-date-heading">
+            <StyledCalendarHeader className="heading-month">
+              {this.state.selectedMonth.format(this.props.monthFormat)}
+              <div className="month-toggler">
+                <span className="month-toggler-buttons">
+                  <button onClick={this.handlePrevMonthClick}>
+                    <i className="fa fa-chevron-left" />
+                  </button>
+                  <button onClick={this.handleNextMonthClick}>
+                    <i className="fa fa-chevron-right" />
+                  </button>
+                </span>
               </div>
-            </div>
+              <div className="heading-year">
+                {this.state.selectedMonth.format('YYYY')}
+              </div>
+            </StyledCalendarHeader>
           </div>
-          <div className="calendar-grid">{this.renderCalendarGrid()}</div>
         </div>
+        <div className="calendar-grid">{this.renderCalendarGrid()}</div>
       </StyledCalendarContainer>
     );
   }

@@ -2,22 +2,70 @@ import React, { Component } from 'react';
 import { isSameDate } from '../../utils/dateUtils';
 import styled from 'styled-components';
 
-import './style.css';
+const hoverBgColor = props => {
+  if (props.selected) {
+    return props.theme.backgroundColor.selected;
+  } else if (props.disabled) {
+    return props.theme.backgroundColor.default;
+  }
+  return props.theme.backgroundColor.hovered;
+};
+
+const hoverTextColor = props => {
+  if (props.selected) {
+    return props.theme.color.selected;
+  } else if (props.disabled) {
+    return props.theme.color.default;
+  }
+  return props.theme.color.hovered;
+};
 
 const StyledCalendarDay = styled.td`
-  border-radius: ${props => props.theme.border.radius}
+  text-align: center;
+  cursor: ${props => (!props.disabled ? 'pointer' : 'default')}
+  border-radius: ${props => props.theme.border.radius};
+
+  background-color: ${props =>
+    props.selected
+      ? props.theme.backgroundColor.selected
+      : props.theme.backgroundColor.default};
+
+  color: ${props =>
+    props.selected ? props.theme.color.selected : props.theme.color.default};
+
+  &:hover {
+    background-color: ${hoverBgColor};
+    color: ${hoverTextColor}
+  }
+  position: relative;
+  width: 10%;
+  
+  &:before {
+    content: "";
+    display: block;
+    padding-top: 100%
+  }
+
+`;
+
+const StyledCalendarDayContent = styled.div`
+  position: absolute;
+  margin: 0;         
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%)
 `;
 
 export default class CalendarDay extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { selected: false };
+    this.state = {
+      selected: false,
+      disabled: this.props.date === null
+    };
   }
-
-  // returnFormattedDate(date) {
-  //   return `date: ${date ? date.format('MM-DD') : 'null'}`;
-  // }
 
   componentWillReceiveProps(nextProps) {
     isSameDate(nextProps.date, nextProps.selectedDate)
@@ -32,12 +80,13 @@ export default class CalendarDay extends Component {
   render() {
     return (
       <StyledCalendarDay
-        className={`calendar-day
-          ${this.state.selected ? 'selected' : ''}
-          ${this.props.date === null ? 'disabled' : ''}`}
         onClick={this.handleDateClick}
+        selected={this.state.selected}
+        disabled={this.state.disabled}
       >
-        {this.props.date ? this.props.date.format('D') : ''}
+        <StyledCalendarDayContent>
+          {this.props.date ? this.props.date.format('D') : ''}
+        </StyledCalendarDayContent>
       </StyledCalendarDay>
     );
   }
