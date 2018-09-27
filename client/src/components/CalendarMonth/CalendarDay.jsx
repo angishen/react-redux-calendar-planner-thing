@@ -20,8 +20,7 @@ const hoverTextColor = props => {
   return props.theme.color.hovered;
 };
 
-const StyledCalendarDay = styled.td`
-  text-align: center;
+const StyledCalendarDay = styled.div`
   cursor: ${props => (!props.disabled ? 'pointer' : 'default')}
   border-radius: ${props => props.theme.border.radius};
 
@@ -37,23 +36,13 @@ const StyledCalendarDay = styled.td`
     background-color: ${hoverBgColor};
     color: ${hoverTextColor}
   }
-  position: relative;
-  width: 10%;
   
-  &:before {
-    content: "";
-    display: block;
-    padding-top: 100%
-  }
-
-`;
-
-const StyledCalendarDayContent = styled.div`
-  position: absolute;
-  margin: 0;         
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%)
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-basis: 14.3%;
+  
 `;
 
 export default class CalendarDay extends Component {
@@ -83,9 +72,7 @@ export default class CalendarDay extends Component {
         selected={this.state.selected}
         disabled={this.state.disabled}
       >
-        <StyledCalendarDayContent>
           {this.props.date ? this.props.date.format('D') : ''}
-        </StyledCalendarDayContent>
       </StyledCalendarDay>
     );
   }

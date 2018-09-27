@@ -20,10 +20,24 @@ const StyledCalendarHeader = styled.div`
   margin-bottom: 6%;
 `;
 
-const StyledTable = styled.table`
+const StyledMonth = styled.div`
   width: 100%;
-  margin: 0 auto;
-  border-spacing: 0px;
+  height: 66.67%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+`;
+
+const StyledWeekdayLabels = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+`;
+
+const StyledWeekdayContent = styled.div`
+  flex-basis: 14.3%
 `;
 
 export default class CalendarMonth extends Component {
@@ -45,27 +59,25 @@ export default class CalendarMonth extends Component {
     const weekdays = this.props.weekdayLabels;
 
     return (
-      <StyledTable>
-        <tbody>
-          <tr className="weekday-labels">
-            {weekdays.map((day, i) => (
-              <td key={i}>{day}</td>
-            ))}
-          </tr>
-          {weeks.map((week, i) => (
-            <CalendarWeek key={i}>
-              {week.map((date, dayOfWeek) =>
-                this.renderCalendarDay({
-                  key: dayOfWeek,
-                  date: date,
-                  selectedDate: this.props.selectedDate,
-                  handleDateClick: this.props.handleDateClick
-                })
-              )}
-            </CalendarWeek>
+      <StyledMonth>
+        <StyledWeekdayLabels className="weekday-labels">
+          {weekdays.map((day, i) => (
+            <StyledWeekdayContent key={i}>{day}</StyledWeekdayContent>
           ))}
-        </tbody>
-      </StyledTable>
+        </StyledWeekdayLabels>
+        {weeks.map((week, i) => (
+          <CalendarWeek key={i}>
+            {week.map((date, dayOfWeek) =>
+              this.renderCalendarDay({
+                key: dayOfWeek,
+                date: date,
+                selectedDate: this.props.selectedDate,
+                handleDateClick: this.props.handleDateClick
+              })
+            )}
+          </CalendarWeek>
+        ))}
+      </StyledMonth>
     );
   }
 
@@ -105,7 +117,7 @@ export default class CalendarMonth extends Component {
             </StyledCalendarHeader>
           </div>
         </div>
-        <div className="calendar-grid">{this.renderCalendarGrid()}</div>
+        {this.renderCalendarGrid()}
       </StyledCalendarContainer>
     );
   }

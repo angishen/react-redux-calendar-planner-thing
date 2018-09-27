@@ -34,8 +34,8 @@ class DatePicker extends Component {
             handleDateClick={this.handleDateClick}
             selectedDate={this.props.selectedDate}
             monthFormat={'MMMM'}
-            width="250px"
-            height="300px"
+            width="175px"
+            height="250px"
             weekdayLabels={weekdayLabels}
           />
         </ThemeProvider>

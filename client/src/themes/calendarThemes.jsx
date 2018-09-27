@@ -45,7 +45,7 @@ export const datePickerTheme = {
       base: '12px',
       small: '10px',
       xsmall: '8px',
-      large: '15px',
+      large: '12px',
       heading: '16px'
     },
     family: {
